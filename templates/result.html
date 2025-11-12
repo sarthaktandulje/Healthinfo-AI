@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diagnosis Result | Healthinfo-AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</head>
+
+<body class="result-body">
+  <div class="container result-container">
+    <h1 class="title">🧬 Diagnosis Report</h1>
+    <p class="subtitle">Your Healthinfo-AI Scan Results</p>
+
+    <div class="result-box">
+      {% if scan_type == 'xray' %}
+        <h3 class="scan-type-heading">🫁 Scan Type: Chest X-ray</h3>
+      {% elif scan_type == 'skin' %}
+        <h3 class="scan-type-heading">🩹 Scan Type: Skin Disease</h3>
+      {% else %}
+        <h3 class="scan-type-heading">🧠 Scan Type: Unknown</h3>
+      {% endif %}
+
+      <!-- Diagnosis Section -->
+      <div class="diagnosis-box">
+        <h2 class="diagnosis-text" style="color: {{ color }};" data-disease="{{ result.split(' ')[0] }}">
+          🩻 Diagnosis: <span>{{ result }}</span>
+        </h2>
+      </div>
+
+      <!-- Cure Section -->
+      <div class="cure-box">
+        <h3>🧾 Suggested Cure / Treatment</h3>
+        <p>{{ cure | safe }}</p>
+      </div>
+
+      {% if image_file %}
+      <div class="image-section">
+        <img src="{{ url_for('static', filename='uploaded/' + image_file) }}" alt="Uploaded Image" class="result-img">
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="scan-complete">
+      ✅ Scanning Complete – Data Processed Successfully
+    </div>
+
+    <div class="language-selector">
+      <button id="translateBtn" class="translate-btn">🌍 English</button>
+      <div id="languageDropdown" class="dropdown hidden">
+        <button onclick="setLanguage('en')">English</button>
+        <button onclick="setLanguage('hi')">हिन्दी</button>
+        <button onclick="setLanguage('ja')">日本語</button>
+      </div>
+    </div>
+
+    <a href="/" class="back-btn">← Back to Home</a>
+
+    <footer>
+      <p>
+        Developed by <strong>Sarthak Tandulje</strong><br>
+        MEXT Scholarship Applicant 2026<br>
+        Built with Flask ⚙️ | TensorFlow 🧠 | HTML 🎨 | CSS 💅 | JS ⚡
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

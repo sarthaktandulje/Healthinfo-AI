@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Healthinfo-AI | Smart Health Diagnosis</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</head>
+
+<body class="index-body">
+  <div class="container">
+    <h1 class="title">🩺 Healthinfo-AI</h1>
+    <p class="subtitle">Your Smart Health Diagnosis Assistant 💉</p>
+
+    <form action="/predict" method="post" enctype="multipart/form-data" class="upload-form">
+      <!-- File Upload -->
+      <label class="upload-label">📁 Upload X-ray or Skin Image</label><br>
+      <input type="file" name="file" accept="image/*" required class="upload-input">
+
+      <!-- Scan Type Selector -->
+      <label class="scan-type-label">🔍 Select Scan Type</label><br>
+      <select name="scan_type" required class="scan-selector">
+        <option value="xray">🫁 Chest X-ray</option>
+        <option value="skin">🩹 Skin Disease</option>
+      </select>
+
+      <!-- Hidden language field (will be set by script.js) -->
+      <input type="hidden" name="lang" id="langInput" value="en">
+
+      <!-- Analyze Button -->
+      <button type="submit" class="analyze-btn">Analyze</button>
+    </form>
+
+    <!-- Language Selector -->
+    <div class="language-selector">
+      <button id="translateBtn" class="translate-btn">🌍 English</button>
+      <div id="languageDropdown" class="dropdown hidden">
+        <button onclick="setLanguage('en')">English</button>
+        <button onclick="setLanguage('hi')">हिन्दी</button>
+        <button onclick="setLanguage('ja')">日本語</button>
+      </div>
+    </div>
+
+    <footer>
+      <p>
+        Developed by <strong>Sarthak Tandulje</strong> <br>
+        MEXT Scholarship Applicant 2026 <br>
+        Built with Flask ⚙️ | TensorFlow 🧠 | HTML 🎨 | CSS 💅 | JS ⚡
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
