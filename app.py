@@ -13,7 +13,7 @@ app = Flask(__name__, static_folder='static', template_folder='templates')
 # ------------------------------
 # Configuration
 # ------------------------------
-MODEL_XRAY_PATH = "model/healthinfo_ai_xray_mobilenetv2_compressed.keras"
+MODEL_XRAY_PATH = "xray_model.keras"
 MODEL_SKIN_PATH = "model/skin_model_final.keras"
 UPLOAD_FOLDER = "static/uploaded"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -267,4 +267,4 @@ def predict():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run
