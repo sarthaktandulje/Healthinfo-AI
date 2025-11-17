@@ -1,2 +1,5 @@
 [build]
-nixpacks = { git_lfs = true }
+nixpacks = true
+
+[build.env]
+NIXPACKS_PRE_INSTALL = "bash download_models.sh"
