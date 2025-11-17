@@ -1,2 +1,2 @@
 [build]
-nixpacks = { git-lfs = true }
+nixpacks = { git_lfs = true }
