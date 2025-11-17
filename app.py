@@ -13,28 +13,50 @@ app = Flask(__name__, static_folder='static', template_folder='templates')
 # ------------------------------
 # Configuration
 # ------------------------------
-MODEL_XRAY_PATH = "model/xray_model.keras"         # FIXED PATH
-MODEL_SKIN_PATH = "model/skin_model_final.keras"   # FIXED PATH
+MODEL_XRAY_PATH = "model/xray_model.keras"
+MODEL_SKIN_PATH = "model/skin_model_final.keras"
 UPLOAD_FOLDER = "static/uploaded"
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # ------------------------------
-# Load Both Models
+# Debug: Check what files actually exist ON RAILWAY
+# ------------------------------
+print("📂 ROOT DIR CONTENT:", os.listdir("."))
+
+if os.path.exists("model"):
+    print("📁 MODEL FOLDER EXISTS")
+    print("📂 MODEL FOLDER CONTENT:", os.listdir("model"))
+else:
+    print("❌ MODEL FOLDER NOT FOUND")
+
+# Check file sizes (to confirm actual LFS files downloaded)
+try:
+    print("🔍 X-RAY MODEL FILE SIZE:", os.path.getsize(MODEL_XRAY_PATH))
+except Exception as e:
+    print("❌ Could not read X-ray model size:", e)
+
+try:
+    print("🔍 SKIN MODEL FILE SIZE:", os.path.getsize(MODEL_SKIN_PATH))
+except Exception as e:
+    print("❌ Could not read skin model size:", e)
+
+# ------------------------------
+# Load Models
 # ------------------------------
 xray_model, skin_model = None, None
 
 try:
     xray_model = tf.keras.models.load_model(MODEL_XRAY_PATH)
-    print("✅ X-ray Model loaded successfully!")
+    print("✅ X-RAY MODEL LOADED SUCCESSFULLY")
 except Exception as e:
-    print(f"⚠️ X-ray model not loaded: {e}")
+    print("❌ X-RAY MODEL FAILED TO LOAD:", e)
 
 try:
     skin_model = tf.keras.models.load_model(MODEL_SKIN_PATH)
-    print("✅ Skin Model loaded successfully!")
+    print("✅ SKIN MODEL LOADED SUCCESSFULLY")
 except Exception as e:
-    print(f"⚠️ Skin model not loaded: {e}")
+    print("❌ SKIN MODEL FAILED TO LOAD:", e)
 
 # ------------------------------
 # Labels
@@ -134,9 +156,7 @@ def predict():
         img_array = image.img_to_array(img)
         img_array = np.expand_dims(img_array, axis=0) / 255.0
 
-        # --------------------------
         # X-RAY Prediction
-        # --------------------------
         if scan_type == "xray":
             if xray_model is None:
                 return jsonify({"error": "X-ray model not loaded!"})
@@ -148,9 +168,7 @@ def predict():
             color = "red" if predicted_class == "Pneumonia" else "green"
             cure = CURES[lang]['xray'].get(predicted_class)
 
-        # --------------------------
         # SKIN Prediction
-        # --------------------------
         elif scan_type == "skin":
             if skin_model is None:
                 return jsonify({"error": "Skin model not loaded!"})
