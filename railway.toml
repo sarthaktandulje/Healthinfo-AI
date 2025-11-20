@@ -1,8 +1,12 @@
 [build]
-builder = "nixpacks"
+builder = "NIXPACKS"
 
-[build.nixpacks.build]
+[build.phases.setup]
 commands = [
-    "chmod +x download_models.sh",
-    "./download_models.sh"
+  "chmod +x download_models.sh"
+]
+
+[build.phases.install]
+commands = [
+  "./download_models.sh"
 ]
