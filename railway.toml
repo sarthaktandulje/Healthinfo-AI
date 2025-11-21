@@ -1,13 +1,5 @@
 [build]
-builder = "NIXPACKS"
-buildCommand = ""
+builder = "nixpacks"
 
-[build.phases.setup]
-commands = [
-  "chmod +x download_models.sh"
-]
-
-[build.phases.install]
-commands = [
-  "./download_models.sh"
-]
+[deploy]
+start = "gunicorn app:app --timeout 200 --workers 1 --bind 0.0.0.0:$PORT"
