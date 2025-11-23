@@ -5,9 +5,17 @@ const translateBtn = document.getElementById("translateBtn");
 const dropdown = document.getElementById("languageDropdown");
 const langInput = document.getElementById("langInput");
 
+// Toggle language dropdown
 if (translateBtn && dropdown) {
   translateBtn.addEventListener("click", () => dropdown.classList.toggle("hidden"));
 }
+
+// Close dropdown when clicking outside
+document.addEventListener("click", (e) => {
+  if (dropdown && !dropdown.contains(e.target) && e.target !== translateBtn) {
+    dropdown.classList.add("hidden");
+  }
+});
 
 // ---------- Dictionary ----------
 const translations = {
@@ -22,6 +30,7 @@ const translations = {
     cureTitle: "🧾 Suggested Cure / Treatment",
     resultTitle: "🧬 Diagnosis Report",
     resultSubtitle: "Your Healthinfo-AI Scan Results",
+    loading: "🔍 Scanning in Progress...",
     diseases: {
       Pneumonia: "Pneumonia",
       Normal: "Normal",
@@ -45,6 +54,7 @@ const translations = {
       vasc: "Often fades naturally; laser therapy if needed."
     }
   },
+
   hi: {
     title: "🩺 हेल्थइन्फो-एआई",
     subtitle: "आपका स्मार्ट स्वास्थ्य सहायक 💉",
@@ -56,6 +66,7 @@ const translations = {
     cureTitle: "🧾 सुझाया गया इलाज / उपचार",
     resultTitle: "🧬 निदान रिपोर्ट",
     resultSubtitle: "आपके Healthinfo-AI स्कैन परिणाम",
+    loading: "🔍 स्कैन जारी है...",
     diseases: {
       Pneumonia: "निमोनिया",
       Normal: "सामान्य",
@@ -79,6 +90,7 @@ const translations = {
       vasc: "अक्सर अपने-आप ठीक हो जाता है; लेज़र उपचार सहायक।"
     }
   },
+
   ja: {
     title: "🩺 ヘルスインフォAI",
     subtitle: "あなたのスマート健康診断アシスタント 💉",
@@ -90,6 +102,7 @@ const translations = {
     cureTitle: "🧾 推奨される治療 / 処置",
     resultTitle: "🧬 診断レポート",
     resultSubtitle: "Healthinfo-AIのスキャン結果",
+    loading: "🔍 スキャン中...",
     diseases: {
       Pneumonia: "肺炎",
       Normal: "正常",
@@ -102,25 +115,24 @@ const translations = {
       vasc: "血管性病変"
     },
     cures: {
-      Pneumonia: "医師の診察を受け、十分な休息と水分補給を行い、蒸気吸入を試みてください。喫煙や汚染された空気を避けましょう。",
+      Pneumonia: "医師の診察を受け、十分な休息と水分補給を行いましょう。",
       Normal: "肺は健康です！ 適度な運動をし、清潔な空気を吸いましょう。",
-      akiec: "皮膚科で処方された外用薬を使用し、紫外線を避けましょう。",
-      bcc: "多くの場合、手術で除去されます。早期発見・早期治療が重要です。",
-      bkl: "無害な皮膚変化です。保湿し、気になる場合は医師に相談してください。",
-      df: "通常は治療不要ですが、見た目が気になる場合は切除可能です。",
-      mel: "悪性腫瘍の可能性があります。できるだけ早く皮膚科を受診してください。",
-      nv: "母斑（ホクロ）は通常無害ですが、変化があれば医師へ相談を。",
-      vasc: "多くは自然に薄くなります。必要に応じてレーザー治療が有効です。"
+      akiec: "皮膚科で処方された外用薬を使用し、紫外線を避けてください。",
+      bcc: "多くの場合、手術で除去されます。",
+      bkl: "無害な皮膚変化です。保湿を心掛けてください。",
+      df: "治療は不要ですが、気になる場合は除去可能です。",
+      mel: "悪性腫瘍の可能性があります。早急に検査を受けてください。",
+      nv: "通常無害ですが、変化があれば医師の診察を。",
+      vasc: "自然に薄くなる場合があります。必要ならレーザー治療が有効です。"
     }
   }
 };
 
-// ---------- Apply Translation ----------
+// Apply translation to elements
 function applyTranslation(lang) {
   const t = translations[lang];
   if (!t) return;
 
-  // Generic labels
   const title = document.querySelector(".title");
   const subtitle = document.querySelector(".subtitle");
   const uploadLabel = document.querySelector(".upload-label");
@@ -139,13 +151,14 @@ function applyTranslation(lang) {
   if (cureTitle) cureTitle.textContent = t.cureTitle;
   if (scanComplete) scanComplete.textContent = t.scanComplete;
 
-  // --- Translate disease + cure ---
+  // Translate diagnosis + cure on result page
   const diagBox = document.querySelector(".diagnosis-text");
   const cureText = document.querySelector(".cure-box p");
+
   if (diagBox && cureText) {
-    const diseaseKey = diagBox.dataset.disease;
-    const translatedDisease = t.diseases[diseaseKey] || diseaseKey;
-    const translatedCure = t.cures[diseaseKey] || cureText.textContent;
+    const disease = diagBox.dataset.disease;
+    const translatedDisease = t.diseases[disease] || disease;
+    const translatedCure = t.cures[disease] || cureText.textContent;
 
     const span = diagBox.querySelector("span");
     if (span) span.textContent = translatedDisease;
@@ -153,7 +166,7 @@ function applyTranslation(lang) {
   }
 }
 
-// ---------- Language Setter ----------
+// Set language manually
 function setLanguage(lang) {
   dropdown.classList.add("hidden");
   translateBtn.innerText =
@@ -166,38 +179,69 @@ function setLanguage(lang) {
   applyTranslation(lang);
 }
 
-// ---------- Initialize ----------
+// Initialize language on page load
 window.addEventListener("load", () => {
   const savedLang = localStorage.getItem("selectedLanguage") || "en";
   if (langInput) langInput.value = savedLang;
   setLanguage(savedLang);
 });
 
-// ---------- Scanning Overlay ----------
+// =========================
+// 🔄 Scanning Overlay
+// =========================
 const uploadForm = document.querySelector(".upload-form");
+
 function createLoadingOverlay() {
   if (document.querySelector(".loading-overlay")) return;
+
   const overlay = document.createElement("div");
   overlay.className = "loading-overlay";
+
+  const selectedLang = localStorage.getItem("selectedLanguage") || "en";
+
   overlay.innerHTML = `
     <div class="scanner-box"><div class="scanner-line"></div></div>
-    <h2>🔍 Scanning in Progress...</h2>`;
+    <h2 id="loadingText">${translations[selectedLang].loading}</h2>
+  `;
+
   document.body.appendChild(overlay);
 }
+
 if (uploadForm) {
-  uploadForm.addEventListener("submit", () => {
+  uploadForm.addEventListener("submit", (e) => {
+    const fileInput = document.querySelector("input[type='file']");
     const selectedLang = localStorage.getItem("selectedLanguage") || "en";
+
+    // File validation
+    if (!fileInput.files.length) {
+      e.preventDefault();
+      alert("⚠️ Please upload an image first!");
+      return;
+    }
+
+    // Prevent double submission
+    uploadForm.querySelector("button[type='submit']").disabled = true;
+
     if (langInput) langInput.value = selectedLang;
+
     createLoadingOverlay();
   });
 }
 
-// ---------- Back button fade ----------
-const backBtn = document.querySelector(".back-btn");
-if (backBtn) {
-  backBtn.addEventListener("click", (e) => {
+// =========================
+// ↩️ Back button smooth fade
+// =========================
+const backBtnFade = document.querySelector(".back-btn");
+
+if (backBtnFade) {
+  backBtnFade.addEventListener("click", (e) => {
     e.preventDefault();
-    document.body.style.opacity = "0";
-    setTimeout(() => (window.location.href = "/"), 300);
+
+    document.body.style.transition = "opacity 0.5s ease";
+    document.body.style.opacity = 0;
+
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 450);
   });
 }

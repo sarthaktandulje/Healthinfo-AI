@@ -1,5 +1,0 @@
-[build]
-builder = "nixpacks"
-
-[deploy]
-start = "gunicorn app:app --timeout 200 --workers 1 --bind 0.0.0.0:$PORT"

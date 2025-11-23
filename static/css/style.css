@@ -8,6 +8,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: fadePage 0.6s ease-in-out;
+}
+
+/* Smooth page fade */
+@keyframes fadePage {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* === INDEX PAGE BACKGROUND === */
@@ -45,25 +52,38 @@ body {
   margin-bottom: 25px;
 }
 
-/* === UPLOAD FORM === */
-.upload-label {
+/* === UPLOAD INPUT === */
+input[type="file"] {
+  display: none;
+}
+
+/* Custom upload button */
+.custom-file-btn {
+  background: linear-gradient(90deg, #00ffcc, #00ccff);
+  padding: 12px 20px;
+  border-radius: 12px;
+  cursor: pointer;
   font-size: 1.1em;
-  color: #ffffffb3;
+  font-weight: bold;
+  transition: 0.3s;
+  display: inline-block;
 }
 
-.upload-input {
-  margin-top: 10px;
+.custom-file-btn:hover {
+  transform: scale(1.07);
+  background: linear-gradient(90deg, #00ccff, #00ff99);
 }
 
+/* === ANALYZE BUTTON === */
 .analyze-btn {
   background: linear-gradient(90deg, #00ffcc, #00ccff);
   border: none;
-  padding: 10px 20px;
-  border-radius: 10px;
+  padding: 12px 20px;
+  border-radius: 12px;
   font-size: 1.1em;
   cursor: pointer;
   transition: 0.3s;
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 .analyze-btn:hover {
@@ -96,8 +116,8 @@ body {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.7);
-  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.75);
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   margin-top: 10px;
@@ -112,7 +132,7 @@ body {
   padding: 10px;
   cursor: pointer;
   font-size: 1em;
-  transition: background 0.3s;
+  transition: 0.3s;
 }
 
 .dropdown button:hover {
@@ -141,6 +161,10 @@ footer {
 /* === RESULT CONTAINER === */
 .result-container {
   background: rgba(0, 0, 20, 0.7);
+  padding: 40px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 700px;
   box-shadow: 0 0 40px rgba(0, 200, 255, 0.4);
   border: 1px solid rgba(0, 255, 255, 0.3);
 }
@@ -162,7 +186,7 @@ footer {
 
 .diagnosis {
   font-size: 1.7em;
-  text-shadow: 0 0 10px #00ffff, 0 0 20px #00ccff;
+  text-shadow: 0 0 8px #00ffff, 0 0 18px #00ccff;
 }
 
 .confidence {
@@ -196,7 +220,7 @@ footer {
   100% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); }
 }
 
-/* === IMAGE SECTION === */
+/* === IMAGE PREVIEW === */
 .result-img {
   width: 300px;
   height: auto;
@@ -286,9 +310,10 @@ footer {
   50% { opacity: 1; }
   100% { opacity: 0.6; }
 }
-/* === FIXED DIAGNOSIS VISIBILITY === */
+
+/* === DIAGNOSIS VISIBILITY FIX === */
 .diagnosis-box {
-  background: rgba(0, 255, 255, 0.1); /* faint cyan glow behind text */
+  background: rgba(0, 255, 255, 0.1);
   border: 1px solid rgba(0, 255, 255, 0.3);
   border-radius: 12px;
   padding: 15px 20px;
@@ -301,14 +326,13 @@ footer {
   font-weight: 600;
   margin: 0;
   text-align: center;
-  text-shadow:
+  text-shadow: 
     0 0 10px rgba(255, 255, 255, 0.8),
     0 0 25px rgba(0, 255, 255, 0.6),
     0 0 40px rgba(0, 255, 255, 0.5);
   animation: fadeInPop 1.2s ease-in-out;
 }
 
-/* Special glow colors */
 .diagnosis-text[style*="red"] {
   text-shadow: 0 0 15px #ff4c4c, 0 0 40px #ff1a1a;
   background: rgba(255, 0, 0, 0.15);
@@ -323,32 +347,8 @@ footer {
   0% { opacity: 0; transform: scale(0.9); }
   100% { opacity: 1; transform: scale(1); }
 }
+
 /* === SCAN TYPE LABEL === */
-.scan-type-heading {
-  font-size: 1.2em;
-  color: #38bdf8;
-  margin-bottom: 15px;
-  text-shadow: 0 0 10px rgba(56, 189, 248, 0.7);
-  animation: fadeIn 1s ease-in-out;
-}
-
-/* === SCAN COMPLETE MESSAGE === */
-.scan-complete {
-  margin-top: 25px;
-  color: #22c55e;
-  font-weight: bold;
-  text-shadow: 0 0 8px rgba(34, 197, 94, 0.8);
-  font-size: 1.1em;
-  animation: pulseGlowGreen 2.5s infinite ease-in-out;
-}
-
-@keyframes pulseGlowGreen {
-  0%   { opacity: 0.6; text-shadow: 0 0 5px #22c55e; }
-  50%  { opacity: 1; text-shadow: 0 0 20px #22c55e, 0 0 35px #22c55e; }
-  100% { opacity: 0.6; text-shadow: 0 0 5px #22c55e; }
-}
-
-/* === SCAN SELECTOR ON INDEX PAGE === */
 .scan-type-label {
   display: block;
   margin-top: 20px;
@@ -375,3 +375,37 @@ footer {
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
 }
 
+/* === MOBILE RESPONSIVE FIXES === */
+@media (max-width: 600px) {
+
+  .container {
+    width: 90%;
+    padding: 25px;
+  }
+
+  .title {
+    font-size: 1.8em;
+  }
+
+  .subtitle {
+    font-size: 1em;
+  }
+
+  .result-container {
+    width: 95%;
+    padding: 25px;
+  }
+
+  .result-img {
+    width: 220px;
+  }
+
+  .diagnosis-text {
+    font-size: 1.8em;
+  }
+
+  .scanner-box {
+    width: 250px;
+    height: 250px;
+  }
+}

@@ -9,11 +9,15 @@
 </head>
 
 <body class="result-body">
+
   <div class="container result-container">
+
     <h1 class="title">🧬 Diagnosis Report</h1>
     <p class="subtitle">Your Healthinfo-AI Scan Results</p>
 
     <div class="result-box">
+
+      <!-- Scan Type Header -->
       {% if scan_type == 'xray' %}
         <h3 class="scan-type-heading">🫁 Scan Type: Chest X-ray</h3>
       {% elif scan_type == 'skin' %}
@@ -24,8 +28,13 @@
 
       <!-- Diagnosis Section -->
       <div class="diagnosis-box">
-        <h2 class="diagnosis-text" style="color: {{ color }};" data-disease="{{ result.split(' ')[0] }}">
-          🩻 Diagnosis: <span>{{ result }}</span>
+        <h2
+          class="diagnosis-text"
+          style="color: {{ color }};"
+          data-disease="{{ result.split(' ')[0] }}"
+        >
+          🩻 Diagnosis:
+          <span>{{ result.split(' ')[0] }} {{ result.split(' ')[1] if result.split(' ')|length > 1 else '' }}</span>
         </h2>
       </div>
 
@@ -35,17 +44,25 @@
         <p>{{ cure | safe }}</p>
       </div>
 
+      <!-- Image Preview -->
       {% if image_file %}
       <div class="image-section">
-        <img src="{{ url_for('static', filename='uploaded/' + image_file) }}" alt="Uploaded Image" class="result-img">
+        <img
+          src="{{ url_for('static', filename='uploaded/' + image_file) }}"
+          alt="Uploaded Image"
+          class="result-img"
+        >
       </div>
       {% endif %}
+
     </div>
 
+    <!-- Scan Complete Message -->
     <div class="scan-complete">
       ✅ Scanning Complete – Data Processed Successfully
     </div>
 
+    <!-- Language Selector -->
     <div class="language-selector">
       <button id="translateBtn" class="translate-btn">🌍 English</button>
       <div id="languageDropdown" class="dropdown hidden">
@@ -55,6 +72,7 @@
       </div>
     </div>
 
+    <!-- Back Button -->
     <a href="/" class="back-btn">← Back to Home</a>
 
     <footer>
@@ -64,6 +82,8 @@
         Built with Flask ⚙️ | TensorFlow 🧠 | HTML 🎨 | CSS 💅 | JS ⚡
       </p>
     </footer>
+
   </div>
+
 </body>
 </html>

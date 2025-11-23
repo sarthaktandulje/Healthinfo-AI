@@ -10,13 +10,21 @@
 
 <body class="index-body">
   <div class="container">
+    
     <h1 class="title">🩺 Healthinfo-AI</h1>
     <p class="subtitle">Your Smart Health Diagnosis Assistant 💉</p>
 
     <form action="/predict" method="post" enctype="multipart/form-data" class="upload-form">
+
       <!-- File Upload -->
       <label class="upload-label">📁 Upload X-ray or Skin Image</label><br>
-      <input type="file" name="file" accept="image/*" required class="upload-input">
+
+      <label class="custom-file-btn">
+        Choose Image
+        <input type="file" name="file" accept="image/*" required>
+      </label>
+
+      <p id="fileName" style="margin-top:10px; opacity:0.8;"></p>
 
       <!-- Scan Type Selector -->
       <label class="scan-type-label">🔍 Select Scan Type</label><br>
@@ -25,7 +33,7 @@
         <option value="skin">🩹 Skin Disease</option>
       </select>
 
-      <!-- Hidden language field (will be set by script.js) -->
+      <!-- Hidden language field -->
       <input type="hidden" name="lang" id="langInput" value="en">
 
       <!-- Analyze Button -->
@@ -49,6 +57,15 @@
         Built with Flask ⚙️ | TensorFlow 🧠 | HTML 🎨 | CSS 💅 | JS ⚡
       </p>
     </footer>
+
   </div>
+
+  <script>
+    // Show selected filename
+    document.querySelector("input[type='file']").addEventListener("change", function () {
+      document.getElementById("fileName").textContent = this.files[0].name;
+    });
+  </script>
+
 </body>
 </html>

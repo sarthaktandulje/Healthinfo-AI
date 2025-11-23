@@ -11,35 +11,34 @@ import tensorflow as tf
 app = Flask(__name__, static_folder='static', template_folder='templates')
 
 # ------------------------------
-# Configuration
+# Configuration (UPDATED PATHS)
 # ------------------------------
-MODEL_XRAY_PATH = "model/xray_model.keras"
-MODEL_SKIN_PATH = "model/skin_model_final.keras"
+MODEL_XRAY_PATH = "healthinfo_models/xray_model_final.h5"
+MODEL_SKIN_PATH = "healthinfo_models/skin_model_final.keras"
 UPLOAD_FOLDER = "static/uploaded"
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # ------------------------------
-# Debug: Check what files actually exist ON RAILWAY
+# Debug Info (optional)
 # ------------------------------
 print("📂 ROOT DIR CONTENT:", os.listdir("."))
 
-if os.path.exists("model"):
+if os.path.exists("healthinfo_models"):
     print("📁 MODEL FOLDER EXISTS")
-    print("📂 MODEL FOLDER CONTENT:", os.listdir("model"))
+    print("📂 MODEL FOLDER CONTENT:", os.listdir("healthinfo_models"))
 else:
     print("❌ MODEL FOLDER NOT FOUND")
 
-# Check file sizes (to confirm actual LFS files downloaded)
-try:
-    print("🔍 X-RAY MODEL FILE SIZE:", os.path.getsize(MODEL_XRAY_PATH))
-except Exception as e:
-    print("❌ Could not read X-ray model size:", e)
+# Check file sizes
+def safe_size(path):
+    try:
+        return os.path.getsize(path)
+    except:
+        return "Not Found"
 
-try:
-    print("🔍 SKIN MODEL FILE SIZE:", os.path.getsize(MODEL_SKIN_PATH))
-except Exception as e:
-    print("❌ Could not read skin model size:", e)
+print("🔍 X-RAY MODEL FILE SIZE:", safe_size(MODEL_XRAY_PATH))
+print("🔍 SKIN MODEL FILE SIZE:", safe_size(MODEL_SKIN_PATH))
 
 # ------------------------------
 # Load Models
@@ -62,12 +61,11 @@ except Exception as e:
 # Labels
 # ------------------------------
 xray_labels = ["Normal", "Pneumonia"]
-skin_labels = ['akiec', 'bcc', 'bkl', 'df', 'mel', 'nv', 'vasc']
+skin_labels = ["akiec", "bcc", "bkl", "df", "mel", "nv", "vasc"]
 
 # ------------------------------
-# Cure Translations (EN / HI / JA)
+# Cure Translations
 # ------------------------------
-
 CURES = {
     'en': {
         'xray': {
@@ -126,7 +124,7 @@ CURES = {
 }
 
 # ------------------------------
-# Routes
+# ROUTES
 # ------------------------------
 @app.route('/')
 def home():
@@ -195,9 +193,11 @@ def predict():
         )
 
     except Exception as e:
-        print("❌ Error:", e)
+        print("❌ Prediction Error:", e)
         return jsonify({"error": f"Prediction failed: {e}"})
 
-
+# ------------------------------
+# MAIN
+# ------------------------------
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
