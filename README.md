@@ -18,6 +18,11 @@ Along with diagnosis, the platform also provides **basic treatment guidance and 
 
 ---
 
+###  Deployed on Kaggle:- 
+--> https://www.kaggle.com/models/sarthaktandulje/healthinfo-ai
+
+---
+
 ## ⚙️ Features  
 
 - 🧠 Dual Deep Learning Models  
@@ -27,7 +32,6 @@ Along with diagnosis, the platform also provides **basic treatment guidance and 
 - 📊 Confidence score for each diagnosis  
 - 💊 Displays basic treatment suggestions & care tips  
 - 🌐 Clean and user-friendly web interface  
-- ⚠️ Designed strictly for educational & assistive purposes  
 
 ---
 
