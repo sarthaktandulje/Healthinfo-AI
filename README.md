@@ -18,7 +18,7 @@ Along with diagnosis, the platform also provides **basic treatment guidance and 
 
 ---
 
-###  Deployed on Kaggle:- 
+### 🔴 Deployed on Kaggle:- 
 --> https://www.kaggle.com/models/sarthaktandulje/healthinfo-ai
 
 ---
