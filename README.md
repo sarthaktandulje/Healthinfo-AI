@@ -90,14 +90,15 @@ Through **Healthinfo-AI**, I aimed to explore how deep learning can assist in **
 - Languages: Python, HTML, CSS, JavaScript  
 - Frameworks & Tools: Flask, TensorFlow, Keras, NumPy, Pandas  
 - Domains: Artificial Intelligence, Machine Learning, Medical Image Analysis  
-## **❗❗Healtinfo-AI is only for project work and not a replacement for professional medical diagnosis tools/models**
-### 🌸 Motto  
+  
+
+###  Motto  
 > *“Using AI not just to predict — but to protect human health.”*
 
 
 ---
 
-## 🧪 How to Run Locally  
+##  How to Run Locally  
 
 ```bash
 git clone https://github.com/sarthaktandulje/Healthinfo-AI.git
