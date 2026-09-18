@@ -1,4 +1,4 @@
-# 🩺 Healthinfo-AI – AI-Powered Medical Image Diagnosis System  
+#  Healthinfo-AI – AI-Powered Medical Image Diagnosis System  
 
 ![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)
@@ -6,36 +6,36 @@
 
 ---
 
-## 🧠 About the Project  
+##  About the Project  
 
 **Healthinfo-AI** is an AI-powered healthcare web application built using **Flask** and **TensorFlow** that assists in **early disease detection** using medical images.  
 
 The system currently supports **two deep learning models**:  
-- 🩻 **Pneumonia detection** from Chest X-ray images  
-- 🧬 **Skin disease classification** from dermatological images  
+-  **Pneumonia detection** from Chest X-ray images  
+-  **Skin disease classification** from dermatological images  
 
 Along with diagnosis, the platform also provides **basic treatment guidance and care recommendations**, making it a helpful tool for **awareness, screening, and educational purposes**.
 
 ---
 
-### 🔴 Deployed on Kaggle:- 
+###  Deployed on Kaggle:- 
 --> https://www.kaggle.com/models/sarthaktandulje/healthinfo-ai
 
 ---
 
-## ⚙️ Features  
+##  Features  
 
-- 🧠 Dual Deep Learning Models  
+-  Dual Deep Learning Models  
   - Chest X-ray Pneumonia Classifier  
   - Multi-class Skin Disease Detector  
-- 📸 Upload medical images for instant AI-based prediction  
-- 📊 Confidence score for each diagnosis  
-- 💊 Displays basic treatment suggestions & care tips  
-- 🌐 Clean and user-friendly web interface  
+-  Upload medical images for instant AI-based prediction  
+-  Confidence score for each diagnosis  
+-  Displays basic treatment suggestions & care tips  
+-  Clean and user-friendly web interface  
 
 ---
 
-## 🏗️ Tech Stack  
+##  Tech Stack  
 
 | Area | Technology |
 |------|-----------|
@@ -48,13 +48,13 @@ Along with diagnosis, the platform also provides **basic treatment guidance and 
 
 ---
 
-## 🧪 Supported Diagnoses  
+##  Supported Diagnoses  
 
-### 🩻 Pneumonia Detection  
+###  Pneumonia Detection  
 - Normal  
 - Pneumonia  
 
-### 🧬 Skin Disease Classification  
+###  Skin Disease Classification  
 - Melanoma  
 - Melanocytic Nevi  
 - Basal Cell Carcinoma  
@@ -65,7 +65,7 @@ Along with diagnosis, the platform also provides **basic treatment guidance and 
 
 ---
 
-## ⚠️ Disclaimer  
+##  Disclaimer  
 
 > **Healthinfo-AI is NOT a medical diagnostic tool.**  
 > This project is developed strictly for **educational, research, and demonstration purposes**.  
@@ -73,7 +73,7 @@ Along with diagnosis, the platform also provides **basic treatment guidance and 
 
 ---
 
-## 👨‍💻 Author – Sarthak Tandulje  
+##  Author – Sarthak Tandulje  
 
 Hi, I'm **Sarthak Tandulje**, a high-school student from India with a strong passion for **Artificial Intelligence, Machine Learning, and Computational Sciences**.  
 
@@ -81,8 +81,8 @@ I am deeply interested in how **AI combined with Physics, Chemistry, and Mathema
 
 Through **Healthinfo-AI**, I aimed to explore how deep learning can assist in **early disease screening**, increase awareness, and support medical research using intelligent systems.
 
-### 🎯 My Goals  
-- To pursue higher studies in **Computer Science & Artificial Intelligence** under the **MEXT Undergraduate Scholarship**, Japan 🇯🇵  
+###  My Goals  
+- To pursue higher studies in **Computer Science & Artificial Intelligence** 
 - To research AI applications in **healthcare, medical imaging, and intelligent systems**  
 - To develop responsible AI solutions focused on **human well-being**
 
