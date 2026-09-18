@@ -65,7 +65,7 @@ Along with diagnosis, the platform also provides **basic treatment guidance and 
 
 ---
 
-##  Disclaimer  
+## ⚠️ Disclaimer  
 
 > **Healthinfo-AI is NOT a medical diagnostic tool.**  
 > This project is developed strictly for **educational, research, and demonstration purposes**.  
