@@ -82,19 +82,15 @@ I am deeply interested in how **AI combined with Physics, Chemistry, and Mathema
 Through **Healthinfo-AI**, I aimed to explore how deep learning can assist in **early disease screening**, increase awareness, and support medical research using intelligent systems.
 
 ###  My Goals  
-- To pursue higher studies in **Computer Science & Artificial Intelligence** 
+- To pursue higher studies in **Artificial Intelligence and Machine Learning** 
 - To research AI applications in **healthcare, medical imaging, and intelligent systems**  
 - To develop responsible AI solutions focused on **human well-being**
 
-### 💡 Skills  
+###  Skills  
 - Languages: Python, HTML, CSS, JavaScript  
 - Frameworks & Tools: Flask, TensorFlow, Keras, NumPy, Pandas  
 - Domains: Artificial Intelligence, Machine Learning, Medical Image Analysis  
   
-
-###  Motto  
-> *“Using AI not just to predict — but to protect human health.”*
-
 
 ---
 
